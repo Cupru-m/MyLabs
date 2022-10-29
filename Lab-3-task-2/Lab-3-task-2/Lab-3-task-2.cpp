@@ -1,13 +1,16 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
+#include <time.h>
+#include<stdlib.h>
+int random_input_mas(int* m, int size);
 int input_mas(int* m, int size);
 int safe_scanf(int number);
 void output_mas(int* m, int size);
 int main()
 {
     int mas[100];
-    int size=0,Ind_of_last_even;
+    int size=0,Ind_of_last_even; 
     printf("imput the size of array:");
   size = safe_scanf(size);
   while (size <= 0)
@@ -17,8 +20,24 @@ int main()
       printf("imput the size of array:");
       size = safe_scanf(size);
   }
-  input_mas( mas, size);
-  int trigger = 0;
+  printf("Choose the method of input \n '1'- hand input \n '2' - rand input\n");
+  int choise = 3;
+  choise = safe_scanf(choise);
+
+  while (choise < 0 || choise >2) {
+      printf("Involid input, try again ");
+      rewind(stdin);
+      choise = safe_scanf(choise);
+  }
+  if (choise == 1) {
+      input_mas(mas, size);
+  }
+  else
+  {
+      random_input_mas(mas, size);
+  }
+  printf("\n");
+    int trigger = 0;
   for (int i = size - 1; i >= 0; i--)
   {
       if ( mas[i] % 2 == 0)
@@ -33,16 +52,13 @@ int main()
       printf("There is no even numbers");
       return 0;
   }
-  while (int size_= size-1 != Ind_of_last_even) 
-  {
-      for (int i = Ind_of_last_even + 1; i < size - 1; i++)
+      for (int i= 1; i!= Ind_of_last_even;i++)
       {
-          mas[i] = mas[i + 1];
+          if (Ind_of_last_even == size - 1) break;
+          mas[Ind_of_last_even+i] = mas[Ind_of_last_even+i+1];
+          size--;
       }
-      size--;
-  }
       output_mas(mas, size);
-
 	return 0;
 }
 int safe_scanf(int number)
@@ -79,7 +95,17 @@ void output_mas(int* m, int size)
 {
     for (int i = 0; i < size; i++)
     {
-        printf("The %d element = %d\n", i+1, m[i]);
+        printf("The % d element = % d\n", i+1, m[i]);
     }
     return;
+}
+int random_input_mas(int* m, int size)
+{
+    srand(time(NULL));
+    for (int i = 0; i < size; i++)
+    {
+        m[i] = -100 + rand() % 200;
+        printf("The %d element = %d\n", i + 1, m[i]);
+    }
+    return *m;
 }
