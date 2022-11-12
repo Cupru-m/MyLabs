@@ -7,6 +7,7 @@ int random_input_mas(int* m, int size);
 int input_mas(int* m, int size);
 int safe_scanf(int number);
 void output_mas(int* m, int size);
+int choose_input_method(int* mas, int size);
 int main()
 {
     int mas[100];
@@ -20,23 +21,7 @@ int main()
       printf("imput the size of array:");
       size = safe_scanf(size);
   }
-  printf("Choose the method of input \n '1'- hand input \n '2' - rand input\n");
-  int choise = 3;
-  choise = safe_scanf(choise);
-
-  while (choise < 0 || choise >2) {
-      printf("Involid input, try again ");
-      rewind(stdin);
-      choise = safe_scanf(choise);
-  }
-  if (choise == 1) {
-      input_mas(mas, size);
-  }
-  else
-  {
-      random_input_mas(mas, size);
-  }
-  printf("\n");
+  choose_input_method(mas, size);
     int trigger = 0;
   for (int i = size - 1; i >= 0; i--)
   {
@@ -108,4 +93,25 @@ int random_input_mas(int* m, int size)
         printf("The %d element = %d\n", i + 1, m[i]);
     }
     return *m;
+}
+int choose_input_method(int* mas, int size)
+{
+    printf("Choose the method of input \n '1'- hand input \n '2' - rand input\n");
+    int choise = 3;
+    choise = safe_scanf(choise);
+
+    while (choise < 0 || choise >2) {
+        printf("Involid input, try again ");
+        rewind(stdin);
+        choise = safe_scanf(choise);
+    }
+    if (choise == 1) {
+        input_mas(mas, size);
+    }
+    else
+    {
+        random_input_mas(mas, size);
+    }
+    printf("\n");
+    return *mas;
 }

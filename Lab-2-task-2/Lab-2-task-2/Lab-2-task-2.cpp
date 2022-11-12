@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdio.h>
 int main()
 {
@@ -13,5 +12,4 @@ int main()
 	}
 	printf("sum of numbers from 1 to 1/n = %f", b);
 	return 0;
-
 }
